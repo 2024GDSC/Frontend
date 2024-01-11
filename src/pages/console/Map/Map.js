@@ -42,7 +42,7 @@ export default function Map({ onDrop, cctvMarkers, onMarkerDrag }) {
 
   return (
     <LoadScript
-      googleMapsApiKey="AIzaSyDlnLYN1Qavcbft65V58_ifdkWD5ATapd4"
+      googleMapsApiKey=""
       onError={onError}
     >
       <GoogleMap
