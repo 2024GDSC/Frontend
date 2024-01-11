@@ -1,0 +1,8 @@
+/* Sidebar.css */
+
+#sidebar {
+  background-color: #f8f9fa; /* Light background color */
+  color: #343a40; /* Text color */
+  padding: 20px; /* Adjust padding as needed */
+  border-right: 1px solid #dee2e6; /* Add a right border for separation */
+}
