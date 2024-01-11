@@ -1,12 +1,17 @@
-export default function SideBar() {
+import React from "react";
+import "./SideBar.css";
+
+const Sidebar = ({ onDropCCTV }) => {
   return (
-    <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
-      <div
-        class="offcanvas-md offcanvas-end bg-body-tertiary"
-        tabIndex={-1}
-        id="sidebarMenu"
-        aria-labelledby="sidebarMenuLabel"
-      ></div>
-    </div>
+    <nav
+      id="sidebar"
+      className="col-md-3 col-lg-2 d-md-block bg-light sidebar order-last"
+    >
+      <div className="position-sticky">
+        <div></div>
+      </div>
+    </nav>
   );
-}
+};
+
+export default Sidebar;

@@ -25,7 +25,7 @@ function Header({ onSignUpClick, onSignInClick }) {
             </a>
           </li>
           <li class="nav-item">
-            <a href="#!" class="nav-link">
+            <a href="console" class="nav-link">
               Console
             </a>
           </li>
