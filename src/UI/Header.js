@@ -1,3 +1,5 @@
+import NavItem from "./NavItem";
+
 function Header({ onSignUpClick, onSignInClick }) {
   return (
     <div class="container">
@@ -9,41 +11,16 @@ function Header({ onSignUpClick, onSignInClick }) {
           <span class="fs-4">Simple header</span>
         </a>
         <ul class="nav nav-pills">
-          <li class="nav-item">
-            <a
-              href="#!"
-              class="nav-link active"
-              aria-current="page"
-              onClick={onSignUpClick}
-            >
-              Sign up
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#!" class="nav-link" onClick={onSignInClick}>
-              Sign in
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="console" class="nav-link">
-              Console
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#!" class="nav-link">
-              Pricing
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#!" class="nav-link">
-              FAQs
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#!" class="nav-link">
-              About
-            </a>
-          </li>
+          <NavItem
+            href="#!"
+            text="Sign up"
+            onClick={onSignUpClick}
+            isActive={true}
+          />
+          <NavItem href="#!" text="Sign in" onClick={onSignInClick} />
+          <NavItem href="console" text="Console" />
+          <NavItem href="#!" text="Pricing" />
+          <NavItem href="#!" text="About" />
         </ul>
       </header>
     </div>
