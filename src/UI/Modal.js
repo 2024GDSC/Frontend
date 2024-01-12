@@ -38,12 +38,12 @@ export default function Modal({ onClose, title }) {
             <div class="modal-body p-5 pt-0">
               <form class="">
                 <Input
-                  type="email"
+                  type="Email address"
                   id="floatingInput"
                   placeholder="name@example.com"
                 />
                 <Input
-                  type="password"
+                  type="Password"
                   id="floatingPassword"
                   placeholder="Password"
                 />

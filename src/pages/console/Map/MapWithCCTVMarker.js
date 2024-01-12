@@ -1,27 +1,33 @@
 import React, { useState } from "react";
 import Map from "./Map";
+import Sidebar from "../../../UI/SideBar";
+import ToggleSwitch from "../../../UI/ToggleSwitch";
 
 const MapWithCCTVMarker = () => {
-  const [cctvMarkers, setCCTVMarkers] = useState([]);
+  const [isMarkerAvailable, setIsMarkerAvailable] = useState(false);
 
-  const handleMapClick = (position) => {
-    const newMarkers = [...cctvMarkers, { id: new Date().getTime(), position }];
-    setCCTVMarkers(newMarkers);
+  const onSetMarkerAvailable = () => {
+    if (isMarkerAvailable) {
+      setIsMarkerAvailable(false);
+    } else {
+      setIsMarkerAvailable(true);
+    }
   };
+
+  // console.log(isMarkerAvailable);
 
   return (
     <div className="d-flex">
-      <div
-        className="p-3"
-        style={{ backgroundColor: "#f8f9fa", minWidth: "200px" }}
-      >
+      <Sidebar location="left">
         <h4>Console</h4>
-        {/* You can add other components or controls here if needed */}
-      </div>
+        <ToggleSwitch setMarkerAvailable={onSetMarkerAvailable}>
+          <label>CCTV</label>
+        </ToggleSwitch>
+      </Sidebar>
 
       {/* Google Map */}
       <div className="flex-grow-1">
-        <Map onDrop={handleMapClick} cctvMarkers={cctvMarkers} />
+        <Map isMarkerAvailable={isMarkerAvailable} />
       </div>
     </div>
   );

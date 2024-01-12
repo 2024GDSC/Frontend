@@ -9,7 +9,7 @@ export default function Input({ type, id, placeholder }) {
         id={id}
         placeholder={placeholder}
       />
-      <label for={id}>Email address</label>
+      <label for={id}>{type}</label>
     </div>
   );
 }
