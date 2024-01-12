@@ -2,9 +2,8 @@
 
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import "./Console.css"; // You can create a CSS file for additional styling
 import SideBar from "../../UI/SideBar";
-import MapWithCCTVMarker from "./Map/MapWithCCTVMarker"; // Replace with the actual name of your map component
+import MapWithCCTVMarker from "./Map/MapWithCCTVMarker";
 
 const rowStyle = {
   paddingLeft: "0",
@@ -16,8 +15,7 @@ const Console = () => {
     <div className="container-fluid">
       <div className="row">
         {/* Sidebar */}
-        <SideBar />
-
+        <SideBar location="right" />
         {/* Main content */}
         <main className="col-md-9 col-lg-10" style={rowStyle}>
           <div className="row">
