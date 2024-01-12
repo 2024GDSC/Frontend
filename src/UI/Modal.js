@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Modal.css";
+import Input from "./Input";
 
 export default function Modal({ onClose, title }) {
   const [isVisible, setIsVisible] = useState(true);
@@ -36,24 +37,16 @@ export default function Modal({ onClose, title }) {
             </div>
             <div class="modal-body p-5 pt-0">
               <form class="">
-                <div class="form-floating mb-3">
-                  <input
-                    type="email"
-                    class="form-control rounded-3"
-                    id="floatingInput"
-                    placeholder="name@example.com"
-                  />
-                  <label for="floatingInput">Email address</label>
-                </div>
-                <div class="form-floating mb-3">
-                  <input
-                    type="password"
-                    class="form-control rounded-3"
-                    id="floatingPassword"
-                    placeholder="Password"
-                  />
-                  <label for="floatingPassword">Password</label>
-                </div>
+                <Input
+                  type="email"
+                  id="floatingInput"
+                  placeholder="name@example.com"
+                />
+                <Input
+                  type="password"
+                  id="floatingPassword"
+                  placeholder="Password"
+                />
                 <button
                   class="w-100 mb-2 btn btn-lg rounded-3 btn-primary"
                   type="submit"
@@ -71,27 +64,18 @@ export default function Modal({ onClose, title }) {
                   class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3"
                   type="submit"
                 >
-                  <svg class="bi me-1" width="16" height="16">
-                    <use xlinkHref="#twitter"></use>
-                  </svg>
                   {title} with Twitter
                 </button>
                 <button
                   class="w-100 py-2 mb-2 btn btn-outline-primary rounded-3"
                   type="submit"
                 >
-                  <svg class="bi me-1" width="16" height="16">
-                    <use xlinkHref="#facebook"></use>
-                  </svg>
                   {title} with Facebook
                 </button>
                 <button
                   class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3"
                   type="submit"
                 >
-                  <svg class="bi me-1" width="16" height="16">
-                    <use xlinkHref="#github"></use>
-                  </svg>
                   {title} with GitHub
                 </button>
               </form>
