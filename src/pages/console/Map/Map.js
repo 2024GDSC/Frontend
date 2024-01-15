@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 
 // Import your custom marker icon image
-import cctvImage from "../../../Assets/CCTVMarkerIcon.png";
+import cctvImage from "../../../Assets/image/CCTVMarkerIcon.png";
 
 export default function Map({ onDrop, cctvMarkers, onMarkerDrag }) {
   const mapContainerStyle = {
@@ -41,10 +41,7 @@ export default function Map({ onDrop, cctvMarkers, onMarkerDrag }) {
   };
 
   return (
-    <LoadScript
-      googleMapsApiKey=""
-      onError={onError}
-    >
+    <LoadScript googleMapsApiKey="" onError={onError}>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={center}

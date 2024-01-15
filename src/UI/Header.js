@@ -1,3 +1,5 @@
+import mainlogo from "../Assets/image/logo.png";
+
 function Header({ onSignUpClick, onSignInClick }) {
   return (
     <div class="container">
@@ -6,7 +8,11 @@ function Header({ onSignUpClick, onSignInClick }) {
           href="/"
           class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
         >
-          <span class="fs-4">Simple header</span>
+          <img
+            src={mainlogo}
+            alt="Purify Logo"
+            style={{ width: "120px", height: "43.32px" }}
+          />
         </a>
         <ul class="nav nav-pills">
           <li class="nav-item">
@@ -32,11 +38,6 @@ function Header({ onSignUpClick, onSignInClick }) {
           <li class="nav-item">
             <a href="#!" class="nav-link">
               Pricing
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#!" class="nav-link">
-              FAQs
             </a>
           </li>
           <li class="nav-item">
