@@ -43,7 +43,7 @@ export default function Map({ isMarkerAvailable }) {
 
   return (
     <LoadScript
-      googleMapsApiKey="AIzaSyDlnLYN1Qavcbft65V58_ifdkWD5ATapd4"
+      googleMapsApiKey=""
       onError={onError}
     >
       <GoogleMap
