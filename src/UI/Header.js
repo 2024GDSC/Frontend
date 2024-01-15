@@ -1,3 +1,6 @@
+import NavItem from "./NavItem";
+import mainlogo from "../Assets/images/logo.png";
+
 function Header({ onSignUpClick, onSignInClick }) {
   return (
     <div class="container">
@@ -6,44 +9,23 @@ function Header({ onSignUpClick, onSignInClick }) {
           href="/"
           class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
         >
-          <span class="fs-4">Simple header</span>
+          <img
+            src={mainlogo}
+            alt="Purify Logo"
+            style={{ width: "120px", height: "43.32px" }}
+          />
         </a>
         <ul class="nav nav-pills">
-          <li class="nav-item">
-            <a
-              href="#!"
-              class="nav-link active"
-              aria-current="page"
-              onClick={onSignUpClick}
-            >
-              Sign up
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#!" class="nav-link" onClick={onSignInClick}>
-              Sign in
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="console" class="nav-link">
-              Console
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#!" class="nav-link">
-              Pricing
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#!" class="nav-link">
-              FAQs
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#!" class="nav-link">
-              About
-            </a>
-          </li>
+          <NavItem
+            href="#!"
+            text="Sign up"
+            onClick={onSignUpClick}
+            isActive={true}
+          />
+          <NavItem href="#!" text="Sign in" onClick={onSignInClick} />
+          <NavItem href="console" text="Console" />
+          <NavItem href="#!" text="Pricing" />
+          <NavItem href="#!" text="About" />
         </ul>
       </header>
     </div>
