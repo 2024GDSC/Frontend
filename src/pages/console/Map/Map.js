@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
-import cctvImage from "../../../Assets/CCTVMarkerIcon.png";
+import cctvImage from "../../../Assets/images/CCTVMarkerIcon.png";
 
 export default function Map({ isMarkerAvailable }) {
   const mapContainerStyle = {
@@ -43,7 +43,7 @@ export default function Map({ isMarkerAvailable }) {
 
   return (
     <LoadScript
-      googleMapsApiKey=""
+      googleMapsApiKey="AIzaSyDlnLYN1Qavcbft65V58_ifdkWD5ATapd4"
       onError={onError}
     >
       <GoogleMap

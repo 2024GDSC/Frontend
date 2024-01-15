@@ -1,4 +1,5 @@
 import NavItem from "./NavItem";
+import mainlogo from "../Assets/images/logo.png";
 
 function Header({ onSignUpClick, onSignInClick }) {
   return (
@@ -8,7 +9,11 @@ function Header({ onSignUpClick, onSignInClick }) {
           href="/"
           class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
         >
-          <span class="fs-4">Simple header</span>
+          <img
+            src={mainlogo}
+            alt="Purify Logo"
+            style={{ width: "120px", height: "43.32px" }}
+          />
         </a>
         <ul class="nav nav-pills">
           <NavItem
