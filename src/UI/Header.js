@@ -1,7 +1,7 @@
 import NavItem from "./NavItem";
 import mainlogo from "../Assets/images/logo.png";
 
-function Header({ onSignUpClick, onSignInClick }) {
+function Header({ onSignInClick }) {
   return (
     <div class="container">
       <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
@@ -16,12 +16,7 @@ function Header({ onSignUpClick, onSignInClick }) {
           />
         </a>
         <ul class="nav nav-pills">
-          <NavItem
-            href="#!"
-            text="Sign up"
-            onClick={onSignUpClick}
-            isActive={true}
-          />
+          <NavItem href="signup" text="Sign up" isActive={true} />
           <NavItem href="#!" text="Sign in" onClick={onSignInClick} />
           <NavItem href="console" text="Console" />
           <NavItem href="#!" text="Pricing" />
