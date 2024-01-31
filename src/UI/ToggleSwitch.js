@@ -1,8 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 
-export default function ToggleSwitch({ children, setMarkerAvailable }) {
+export default function ToggleSwitch({
+  children,
+  setMarkerAvailable,
+  isMarkerAvailable,
+  setDeleteAvailable,
+  isDeleteAvailable,
+  id,
+}) {
   const toggleHandler = () => {
-    setMarkerAvailable();
+    if (id === "marker") {
+      setMarkerAvailable();
+    } else {
+      setDeleteAvailable();
+    }
   };
   return (
     <div class="form-check form-switch" onClick={toggleHandler}>
@@ -11,7 +22,7 @@ export default function ToggleSwitch({ children, setMarkerAvailable }) {
         class="form-check-input"
         type="checkbox"
         role="switch"
-        id="flexSwitchCheckChecked"
+        checked={isMarkerAvailable ? isMarkerAvailable : isDeleteAvailable}
       />
     </div>
   );
