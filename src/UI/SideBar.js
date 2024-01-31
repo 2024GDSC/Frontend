@@ -3,14 +3,15 @@ import "./SideBar.css";
 
 const Sidebar = ({ location, children }) => {
   return (
-    <nav
+    <div
       id="sidebar"
-      className={`col-md-3 col-lg-2 d-md-block bg-light sidebar ${
+      className={`d-flex flex-column flex-shirink-0 p-3 bg-body-tertiary ${
         location === "right" ? "order-last" : ""
       }`}
+      style={{ width: `${location === "left" ? "240px" : "400px"}` }}
     >
-      <div className="position-sticky">{children}</div>
-    </nav>
+      {children}
+    </div>
   );
 };
 
