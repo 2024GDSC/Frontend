@@ -19,6 +19,28 @@ const MapWithCCTVMarker = ({
   const [newProjectName, setNewProjectName] = useState("");
   const [showAddProjectModal, setShowAddProjectModal] = useState(false);
 
+  const [touched, setTouched] = useState(false);
+  const [validity, setValidity] = useState(false);
+
+  const handleValidation = (event) => {
+    const inputValue = event.target.value;
+    setTouched(true);
+
+    // Update the parent component about the validity change
+    const isValid = validateField(inputValue);
+    setValidity(isValid);
+  };
+
+  const getFeedbackMessage = () => {
+    if (touched && !validity) {
+      return "Title must be longer than 1";
+    }
+  };
+
+  const validateField = (value) => {
+    return value.trim().length >= 1; // Ensure that we trim the value before checking its length
+  };
+
   const handleMapClick = (map) => {
     setCurrentMap(map);
   };
@@ -34,12 +56,11 @@ const MapWithCCTVMarker = ({
         id: projectMaps.length + 1,
       };
 
-      console.log(newProjectMap);
-
       setProjectMaps([...projectMaps, newProjectMap]);
       setCurrentMap(newProjectMap);
       setNewProjectName("");
       setShowAddProjectModal(false);
+    } else {
     }
   };
 
@@ -114,18 +135,35 @@ const MapWithCCTVMarker = ({
           title={"Set map title"}
         >
           <form action="">
-            <Input
-              type="Title"
-              id="title"
-              placeholder="Map 1"
-              onChange={(e) => setNewProjectName(e.target.value)}
-            />
+            <div className={`input-group has-validation`}>
+              <Input
+                type="Title"
+                id="title"
+                placeholder="Map 1"
+                onChange={(e) => {
+                  setNewProjectName(e.target.value);
+                  handleValidation(e); // Pass the event object to handleValidation
+                }}
+                validity={validity}
+                touched={touched}
+              >
+                <div className="invalid-feedback">{getFeedbackMessage()}</div>
+              </Input>
+            </div>
             <button
               className="w-100 mb-2 btn btn-lg rounded-3 btn-primary"
               type="submit"
               onClick={handleSaveProject}
+              disabled={!validity}
             >
               {"Create Map"}
+            </button>
+            <button
+              className="w-100 mb-2 btn btn-lg rounded-3 btn-outline-danger"
+              type="submit"
+              onClick={() => setShowAddProjectModal(false)}
+            >
+              {"Cancel"}
             </button>
           </form>
         </Modal>
