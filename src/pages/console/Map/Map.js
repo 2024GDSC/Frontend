@@ -36,9 +36,9 @@ export default function Map({
     if (isReset) {
       setMarkers([]);
       // Reset isReset to false after clearing markers
+      setReset(false);
     }
-    setReset(false);
-  }, [isReset]);
+  }, [isReset, setReset]);
 
   console.log("marker: ", isMarkerAvailableRef.current);
   console.log("delete: ", isDeleteAvailableRef.current);

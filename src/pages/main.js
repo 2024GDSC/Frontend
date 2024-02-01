@@ -1,27 +1,36 @@
 import AlignedJumbotron from "../UI/AlignedJumbotron";
 import ClassicJumbotron from "../UI/ClassicJumbotron";
 import Header from "../UI/Header";
-import { useState } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Modal from "../UI/Modal";
 import Footer from "../UI/Footer";
 import Input from "../UI/Input";
+import Album from "../UI/Album";
 
 export default function Main() {
   const [isSignInVisible, setSignInVisibility] = useState(false);
+  const navigate = useNavigate();
 
   const handleSignInClick = () => {
     setSignInVisibility(true);
   };
+
+  const handleSignUpClick = () => {
+    setSignInVisibility(false); // Close the sign-in modal
+    navigate("/signup"); // Navigate to the signup page
+  };
   return (
-    <div class="container py-4">
+    <div className="container py-4">
       <Header onSignInClick={handleSignInClick}></Header>
       <ClassicJumbotron></ClassicJumbotron>
       <AlignedJumbotron></AlignedJumbotron>
+      <Album title={"Projects"}></Album>
       <Footer></Footer>
 
       {isSignInVisible && (
         <Modal onClose={() => setSignInVisibility(false)} title="Sign in">
-          <form class="">
+          <form>
             <Input
               type="Email address"
               id="floatingInput"
@@ -33,14 +42,15 @@ export default function Main() {
               placeholder="Password"
             />
             <button
-              class="w-100 mb-2 btn btn-lg rounded-3 btn-primary"
+              className="w-100 mb-2 btn btn-lg rounded-3 btn-primary"
               type="submit"
             >
               {"Sign in"}
             </button>
             <button
-              class="w-100 mb-2 btn btn-lg rounded-3 btn-outline-primary"
-              type="submit"
+              className="w-100 mb-2 btn btn-lg rounded-3 btn-outline-primary"
+              type="button"
+              onClick={handleSignUpClick}
             >
               {"Sign up"}
             </button>

@@ -1,38 +1,21 @@
 import React from "react";
-import mainlogo from "../Assets/images/logo.png";
 
 const Footer = () => {
+  const footer = ["Home", "Features", "Pricing", "FAQs", "About"];
   return (
-    <div class="container">
-      <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-        <p class="col-md-4 mb-0 text-body-secondary">© 2024 Purify</p>
-
-        <ul class="nav col-md-4 justify-content-end">
-          <li class="nav-item">
-            <a href="#!" class="nav-link px-2 text-body-secondary">
-              Home
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#!" class="nav-link px-2 text-body-secondary">
-              Features
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#!" class="nav-link px-2 text-body-secondary">
-              Pricing
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#!" class="nav-link px-2 text-body-secondary">
-              FAQs
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#!" class="nav-link px-2 text-body-secondary">
-              About
-            </a>
-          </li>
+    <div className="container">
+      <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <p className="col-md-4 mb-0 text-body-secondary">© 2024 Purify</p>
+        <ul className="nav col-md-4 justify-content-end">
+          {footer.map((title) => {
+            return (
+              <li className="nav-item" key={"footer" + title}>
+                <a href="#!" className="nav-link px-2 text-body-secondary">
+                  {title}
+                </a>
+              </li>
+            );
+          })}
         </ul>
       </footer>
     </div>

@@ -62,54 +62,57 @@ const Console = () => {
     setSearchQuery(query); // Update the search query state
     // You can use this information to update the map with the searched location
   };
+
+  const progresses = [10, 20, 35, 40, 80, 100];
+
   return (
     <div>
       <div className="d-flex flex-nowrap">
         {/* Sidebar */}
         <SideBar location="right">
-          <span class="fs-4 fw-semibold ">Console</span>
+          <span className="fs-4 fw-semibold ">Console</span>
           <hr></hr>
           <GoogleMapSearchBar onSearch={handleMapSearch} />
-          <ul class="list-unstyled ps-0">
-            <li class="mb-1">
+          <ul className="list-unstyled ps-0">
+            <li className="mb-1">
               <button
-                class="btn btn-toggle d-inline-flex align-items-center rounded border-0"
+                className="btn btn-toggle d-inline-flex align-items-center rounded border-0"
                 data-bs-toggle="collapse"
                 data-bs-target="#home-collapse"
                 aria-expanded="false"
               >
                 Edit
               </button>
-              <div class="collapse show" id="home-collapse">
-                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
+              <div className="collapse show" id="home-collapse">
+                <ul className="btn-toggle-nav list-unstyled fw-normal pb-1">
                   <li>
-                    <div class="form-check form-switch">
+                    <div className="form-check form-switch">
                       <ToggleSwitch
                         setMarkerAvailable={onSetMarkerAvailable}
                         isMarkerAvailable={isMarkerAvailable}
                         id={"marker"}
                       >
-                        <label class="form-check-label">Add CCTV</label>
+                        <label className="form-check-label">Add CCTV</label>
                       </ToggleSwitch>
                     </div>
                   </li>
                   <li>
-                    <div class="form-check form-switch">
+                    <div className="form-check form-switch">
                       <ToggleSwitch
                         setDeleteAvailable={onSetDeleteAvailable}
                         isDeleteAvailable={isDeleteAvailable}
                         id={"delete"}
                       >
-                        <label class="form-check-label">Delete CCTV</label>
+                        <label className="form-check-label">Delete CCTV</label>
                       </ToggleSwitch>
                     </div>
                   </li>
                 </ul>
               </div>
             </li>
-            <li class="mb-1">
+            <li className="mb-1">
               <button
-                class="btn btn-toggle d-inline-flex align-items-center rounded border-0"
+                className="btn btn-toggle d-inline-flex align-items-center rounded border-0"
                 data-bs-toggle="collapse"
                 data-bs-target="#home-collapse"
                 aria-expanded="false"
@@ -117,13 +120,15 @@ const Console = () => {
                 Evaluation
               </button>
 
-              <div class="collapse show" id="home-collapse">
+              <div className="collapse show" id="home-collapse">
                 <ul>
-                  <ProgressBar percentage={0}></ProgressBar>
-                  <ProgressBar percentage={10}></ProgressBar>
-                  <ProgressBar percentage={40}></ProgressBar>
-                  <ProgressBar percentage={50}></ProgressBar>
-                  <ProgressBar percentage={100}></ProgressBar>
+                  {progresses.map((percentage, idx) => {
+                    return (
+                      <div key={idx}>
+                        <ProgressBar percentage={percentage}></ProgressBar>
+                      </div>
+                    );
+                  })}
                 </ul>
               </div>
             </li>
@@ -131,15 +136,15 @@ const Console = () => {
 
           <div className="mt-auto">
             <hr />
-            <div class="d-grid gap-3">
-              <button class="btn btn-primary" type="button">
+            <div className="d-grid gap-3">
+              <button className="btn btn-primary" type="button">
                 Evaluate
               </button>
-              <button class="btn btn-outline-primary" type="button">
+              <button className="btn btn-outline-primary" type="button">
                 Save
               </button>
               <button
-                class="btn btn-outline-primary"
+                className="btn btn-outline-primary"
                 type="button"
                 onClick={onSetReset}
               >

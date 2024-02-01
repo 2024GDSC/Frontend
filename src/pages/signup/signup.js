@@ -1,34 +1,82 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import mainlogo from "../../Assets/images/logo.png";
 import SignupInput from "../../UI/SignupInput";
 
 export default function Signup() {
+  const [firstNameValid, setFirstNameValid] = useState(false);
+  const [lastNameValid, setLastNameValid] = useState(false);
+  const [emailValid, setEmailValid] = useState(false);
+  const [passwordValid, setPasswordValid] = useState(false);
+
+  const validity =
+    firstNameValid && lastNameValid && emailValid && passwordValid;
+
+  const navigate = useNavigate();
+
+  const handleValidityChange = (field, isValid) => {
+    switch (field) {
+      case "firstName":
+        setFirstNameValid(isValid);
+        break;
+      case "lastName":
+        setLastNameValid(isValid);
+        break;
+      case "email":
+        setEmailValid(isValid);
+        break;
+      case "password":
+        setPasswordValid(isValid);
+        break;
+      // Handle other fields similarly
+      default:
+        break;
+    }
+  };
+
+  const handleSignUp = (event) => {
+    event.preventDefault();
+
+    // Additional logic if needed before navigating
+
+    // Navigate to the main page if validity is true
+    if (validity) {
+      navigate("/"); // Replace "/" with the actual path of your main page
+    }
+  };
+
   return (
     <div class="container">
       <div class="py-4 text-center ">
         <a href="/">
           <img
-            class="d-block mx-auto mb-4"
+            className="d-block mx-auto mb-4"
             src={mainlogo}
             alt="Purify Logo"
             width="200"
             height="72.2"
           />
         </a>
-        <h2 class="mb-3">Sign up form</h2>
+        <h2 className="mb-3">Sign up form</h2>
       </div>
 
       <div className="d-flex justify-content-center">
-        <div class="col-md-12 col-lg-8">
-          <form class="needs-validation" novalidate="">
-            <div class="row g-3">
+        <div className="col-md-12 col-lg-8">
+          <form
+            className="needs-validation"
+            noValidate=""
+            onSubmit={handleSignUp}
+          >
+            <div className="row g-3">
               <SignupInput
                 label="First name"
                 id="firstName"
                 type="firstName"
                 placeholder=""
                 required=""
-                feedback="Valid first name is required."
+                onValidityChange={(isValid) =>
+                  handleValidityChange("firstName", isValid)
+                }
               />
 
               <SignupInput
@@ -37,7 +85,9 @@ export default function Signup() {
                 type="lastName"
                 placeholder=""
                 required=""
-                feedback="Valid last name is required."
+                onValidityChange={(isValid) =>
+                  handleValidityChange("lastName", isValid)
+                }
               />
 
               <SignupInput
@@ -46,7 +96,9 @@ export default function Signup() {
                 type="email"
                 placeholder="Email address"
                 required=""
-                feedback="Your email address is required."
+                onValidityChange={(isValid) =>
+                  handleValidityChange("email", isValid)
+                }
               />
 
               <SignupInput
@@ -55,7 +107,9 @@ export default function Signup() {
                 type="password"
                 placeholder=""
                 required=""
-                feedback="Valid password is required."
+                onValidityChange={(isValid) =>
+                  handleValidityChange("password", isValid)
+                }
               />
 
               <SignupInput
@@ -64,38 +118,40 @@ export default function Signup() {
                 type="text"
                 placeholder="1234 Main St"
                 required=""
-                feedback="Please enter your shipping address."
               />
 
               <SignupInput
-                label="Address 2"
+                label="Address 2(Optional)"
                 id="address2"
                 type="text"
                 placeholder="Apartment or suite"
                 required=""
-                feedback=""
               />
             </div>
 
-            <hr class="my-4" />
+            <hr className="my-4" />
 
-            <button class="w-100 btn btn-primary btn-lg" type="submit">
+            <button
+              className="w-100 btn btn-primary btn-lg"
+              type="submit"
+              disabled={!validity}
+            >
               Continue to sign up
             </button>
           </form>
         </div>
       </div>
 
-      <footer class="my-5 pt-2 text-body-secondary text-center text-small">
-        <p class="mb-1">© 2023-2024 Purify</p>
-        <ul class="list-inline">
-          <li class="list-inline-item">
+      <footer className="my-5 pt-2 text-body-secondary text-center text-small">
+        <p className="mb-1">© 2023-2024 Purify</p>
+        <ul className="list-inline">
+          <li className="list-inline-item">
             <a href="#!">Privacy</a>
           </li>
-          <li class="list-inline-item">
+          <li className="list-inline-item">
             <a href="#!">Terms</a>
           </li>
-          <li class="list-inline-item">
+          <li className="list-inline-item">
             <a href="#!">Support</a>
           </li>
         </ul>
