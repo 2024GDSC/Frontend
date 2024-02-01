@@ -118,6 +118,9 @@ export default function Signup() {
                 type="text"
                 placeholder="1234 Main St"
                 required=""
+                onValidityChange={(isValid) =>
+                  handleValidityChange("", isValid)
+                }
               />
 
               <SignupInput
@@ -126,6 +129,9 @@ export default function Signup() {
                 type="text"
                 placeholder="Apartment or suite"
                 required=""
+                onValidityChange={(isValid) =>
+                  handleValidityChange("", isValid)
+                }
               />
             </div>
 
