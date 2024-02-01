@@ -16,10 +16,10 @@ export default function ToggleSwitch({
     }
   };
   return (
-    <div class="form-check form-switch" onClick={toggleHandler}>
+    <div className="form-check form-switch" onClick={toggleHandler}>
       {children}
       <input
-        class="form-check-input"
+        className="form-check-input"
         type="checkbox"
         role="switch"
         checked={isMarkerAvailable ? isMarkerAvailable : isDeleteAvailable}

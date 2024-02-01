@@ -48,7 +48,7 @@ const MapWithCCTVMarker = ({
       <Sidebar location="left">
         <a
           href="/"
-          class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
+          className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
         >
           <img
             src={mainlogo}
@@ -57,7 +57,7 @@ const MapWithCCTVMarker = ({
           />
         </a>
         <hr />
-        <ul class="nav nav-pills flex-column mb-auto">
+        <ul className="nav nav-pills flex-column mb-auto">
           {projectMaps.map((map) => (
             <ProjectMap
               key={map.id}
@@ -67,10 +67,10 @@ const MapWithCCTVMarker = ({
             />
           ))}
           <li>
-            <div class="d-grid">
+            <div className="d-grid">
               <button
                 type="button"
-                class="btn btn-outline-secondary mt-1"
+                className="btn btn-outline-secondary mt-1"
                 onClick={handleAddProject}
               >
                 Create map
@@ -79,10 +79,10 @@ const MapWithCCTVMarker = ({
           </li>
         </ul>
         <hr />
-        <div class="dropdown">
+        <div className="dropdown">
           <a
             href="#!"
-            class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
+            className="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
@@ -91,7 +91,7 @@ const MapWithCCTVMarker = ({
               alt=""
               width="32"
               height="32"
-              class="rounded-circle me-2"
+              className="rounded-circle me-2"
             />
             <strong>Hyunseo</strong>
           </a>
@@ -121,7 +121,7 @@ const MapWithCCTVMarker = ({
               onChange={(e) => setNewProjectName(e.target.value)}
             />
             <button
-              class="w-100 mb-2 btn btn-lg rounded-3 btn-primary"
+              className="w-100 mb-2 btn btn-lg rounded-3 btn-primary"
               type="submit"
               onClick={handleSaveProject}
             >
