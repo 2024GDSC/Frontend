@@ -34,7 +34,7 @@ export default function Modal({ onClose, title, children }) {
                 onClick={handleClose}
               ></button>
             </div>
-            <div class="modal-body p-5 pt-0">{children}</div>
+            <div className="modal-body p-5 pt-0">{children}</div>
           </div>
         </div>
       </div>
