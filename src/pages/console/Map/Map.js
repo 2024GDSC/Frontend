@@ -50,7 +50,7 @@ export default function Map({
   }, [isReset, setReset]);
 
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "AIzaSyDlnLYN1Qavcbft65V58_ifdkWD5ATapd4",
+    googleMapsApiKey: "",
     libraries,
   });
 
