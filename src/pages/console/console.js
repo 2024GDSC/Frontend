@@ -1,6 +1,7 @@
 // Console.js
 
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SideBar from "../../UI/SideBar";
 import MapWithCCTVMarker from "./Map/MapWithCCTVMarker"; // Replace with the actual name of your map component
@@ -26,6 +27,8 @@ const Console = () => {
   //   alert("Please sign in to access console!");
   //   return <Navigate to="/" />;
   // }
+
+  const { projectName } = useParams();
 
   const [isMarkerAvailable, setIsMarkerAvailable] = useState(false);
   const [isDeleteAvailable, setIsDeleteAvailable] = useState(false);
@@ -70,7 +73,9 @@ const Console = () => {
       <div className="d-flex flex-nowrap">
         {/* Sidebar */}
         <SideBar location="right">
-          <span className="fs-4 fw-semibold ">Console</span>
+          <span className="fs-4 fw-semibold ">
+            {projectName ? projectName : "Console"}
+          </span>
           <hr></hr>
           <GoogleMapSearchBar onSearch={handleMapSearch} />
           <ul className="list-unstyled ps-0">

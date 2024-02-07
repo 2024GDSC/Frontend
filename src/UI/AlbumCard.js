@@ -1,6 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const AlbumCard = ({ projectName }) => {
+  const navigate = useNavigate();
+
+  const navigateToConsole = () => {
+    navigate(`/console/${projectName}`);
+  };
   return (
     <div className="col">
       <div className="card shadow-sm">
@@ -24,7 +30,11 @@ const AlbumCard = ({ projectName }) => {
           <p className="card-text">{projectName}</p>
           <div className="d-flex justify-content-between align-items-center">
             <div className="btn-group">
-              <button type="button" className="btn btn-sm btn-outline-primary">
+              <button
+                type="button"
+                className="btn btn-sm btn-outline-primary"
+                onClick={navigateToConsole}
+              >
                 View
               </button>
             </div>
