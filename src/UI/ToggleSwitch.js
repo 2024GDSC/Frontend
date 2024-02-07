@@ -23,6 +23,7 @@ export default function ToggleSwitch({
         type="checkbox"
         role="switch"
         checked={isMarkerAvailable ? isMarkerAvailable : isDeleteAvailable}
+        readOnly={true}
       />
     </div>
   );

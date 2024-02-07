@@ -10,7 +10,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Main />}></Route>
-          <Route path="/console" element={<Console />}></Route>
+          <Route path="/console/" element={<Console />}>
+            <Route path=":projectName"></Route>
+          </Route>
           <Route path="/signup" element={<Signup />}></Route>
         </Routes>
       </BrowserRouter>
