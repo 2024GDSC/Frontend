@@ -2,8 +2,14 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import mainlogo from "../../Assets/images/logo.png";
 import SignupInput from "../../UI/SignupInput";
+import axios from "axios";
 
-export default function Signup() {
+export default function SignUp() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const [firstNameValid, setFirstNameValid] = useState(false);
   const [lastNameValid, setLastNameValid] = useState(false);
   const [emailValid, setEmailValid] = useState(false);
@@ -14,19 +20,23 @@ export default function Signup() {
 
   const navigate = useNavigate();
 
-  const handleValidityChange = (field, isValid) => {
+  const handleValidityChange = (field, isValid, validValue) => {
     switch (field) {
       case "firstName":
         setFirstNameValid(isValid);
+        setFirstName(validValue); // Set the valid value in state
         break;
       case "lastName":
         setLastNameValid(isValid);
+        setLastName(validValue); // Set the valid value in state
         break;
       case "email":
         setEmailValid(isValid);
+        setEmail(validValue); // Set the valid value in state
         break;
       case "password":
         setPasswordValid(isValid);
+        setPassword(validValue); // Set the valid value in state
         break;
       // Handle other fields similarly
       default:
@@ -34,20 +44,33 @@ export default function Signup() {
     }
   };
 
-  const handleSignUp = (event) => {
+  const handleSignUp = async (event) => {
     event.preventDefault();
 
-    // Additional logic if needed before navigating
-
-    // Navigate to the main page if validity is true
     if (validity) {
-      navigate("/"); // Replace "/" with the actual path of your main page
+      try {
+        const response = await axios.post(
+          "http://34.47.72.96:9001/member/signup",
+          {
+            email,
+            name: `${firstName} ${lastName}`,
+            password,
+            role: "SIMULATOR",
+          }
+        );
+
+        console.log("Signup successful:", response.data);
+        navigate("/"); // Replace "/" with the actual path of your main page
+      } catch (error) {
+        console.error("Signup failed:", error);
+        // Handle error (show a message to the user, etc.)
+      }
     }
   };
 
   return (
-    <div class="container">
-      <div class="py-4 text-center ">
+    <div className="container">
+      <div className="py-4 text-center ">
         <a href="/">
           <img
             className="d-block mx-auto mb-4"
@@ -74,8 +97,8 @@ export default function Signup() {
                 type="firstName"
                 placeholder=""
                 required=""
-                onValidityChange={(isValid) =>
-                  handleValidityChange("firstName", isValid)
+                onValidityChange={(isValid, validValue) =>
+                  handleValidityChange("firstName", isValid, validValue)
                 }
               />
 
@@ -85,8 +108,8 @@ export default function Signup() {
                 type="lastName"
                 placeholder=""
                 required=""
-                onValidityChange={(isValid) =>
-                  handleValidityChange("lastName", isValid)
+                onValidityChange={(isValid, validValue) =>
+                  handleValidityChange("lastName", isValid, validValue)
                 }
               />
 
@@ -96,8 +119,8 @@ export default function Signup() {
                 type="email"
                 placeholder="Email address"
                 required=""
-                onValidityChange={(isValid) =>
-                  handleValidityChange("email", isValid)
+                onValidityChange={(isValid, validValue) =>
+                  handleValidityChange("email", isValid, validValue)
                 }
               />
 
@@ -107,8 +130,8 @@ export default function Signup() {
                 type="password"
                 placeholder=""
                 required=""
-                onValidityChange={(isValid) =>
-                  handleValidityChange("password", isValid)
+                onValidityChange={(isValid, validValue) =>
+                  handleValidityChange("password", isValid, validValue)
                 }
               />
 

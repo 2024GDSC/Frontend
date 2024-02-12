@@ -64,6 +64,13 @@ const MapWithCCTVMarker = ({
     }
   };
 
+  const handleDeleteProject = (projectId) => {
+    const updatedProjectMaps = projectMaps.filter(
+      (map) => map.id !== projectId
+    );
+    setProjectMaps(updatedProjectMaps);
+  };
+
   return (
     <div className="d-flex">
       <Sidebar location="left">
@@ -85,8 +92,10 @@ const MapWithCCTVMarker = ({
               title={map.title}
               current={map.id === currentMap.id}
               onClick={() => handleMapClick(map)}
+              onDelete={() => handleDeleteProject(map.id)}
             />
           ))}
+
           <li>
             <div className="d-grid">
               <button

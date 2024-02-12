@@ -20,9 +20,9 @@ const SignupInput = ({
     setValue(event.target.value);
     setTouched(true);
 
-    // Update the parent component about the validity change
+    // Update the parent component about the validity change and pass the valid value
     const isValid = validateField(type, event.target.value);
-    onValidityChange(isValid);
+    onValidityChange(isValid, isValid ? event.target.value : "");
   };
 
   const validateField = (fieldType, value) => {
