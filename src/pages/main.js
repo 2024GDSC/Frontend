@@ -1,15 +1,16 @@
-import AlignedJumbotron from "../UI/AlignedJumbotron";
-import ClassicJumbotron from "../UI/ClassicJumbotron";
-import Header from "../UI/Header";
+// Main.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Modal from "../UI/Modal";
-import Footer from "../UI/Footer";
-import Input from "../UI/Input";
+import Header from "../UI/Header";
+import ClassicJumbotron from "../UI/ClassicJumbotron";
+import AlignedJumbotron from "../UI/AlignedJumbotron";
 import Album from "../UI/Album";
+import Footer from "../UI/Footer";
+import SignIn from "./Membership/SignIn";
 
 export default function Main() {
   const [isSignInVisible, setSignInVisibility] = useState(false);
+  const [isSignedIn, setSignedIn] = useState(false); // Add state for sign-in status
   const navigate = useNavigate();
 
   const handleSignInClick = () => {
@@ -17,45 +18,30 @@ export default function Main() {
   };
 
   const handleSignUpClick = () => {
-    setSignInVisibility(false); // Close the sign-in modal
-    navigate("/signup"); // Navigate to the signup page
+    setSignInVisibility(false);
+    navigate("/signup");
   };
+
+  const handleSignInSuccess = () => {
+    setSignedIn(true);
+  };
+
+  const renderAlbum = isSignedIn ? <Album title={"Projects"}></Album> : null;
+
   return (
     <div className="container py-4">
       <Header onSignInClick={handleSignInClick}></Header>
       <ClassicJumbotron></ClassicJumbotron>
       <AlignedJumbotron></AlignedJumbotron>
-      <Album title={"Projects"}></Album>
+      {renderAlbum}
       <Footer></Footer>
 
       {isSignInVisible && (
-        <Modal onClose={() => setSignInVisibility(false)} title="Sign in">
-          <form>
-            <Input
-              type="Email address"
-              id="floatingInput"
-              placeholder="name@example.com"
-            />
-            <Input
-              type="Password"
-              id="floatingPassword"
-              placeholder="Password"
-            />
-            <button
-              className="w-100 mb-2 btn btn-lg rounded-3 btn-primary"
-              type="submit"
-            >
-              {"Sign in"}
-            </button>
-            <button
-              className="w-100 mb-2 btn btn-lg rounded-3 btn-outline-primary"
-              type="button"
-              onClick={handleSignUpClick}
-            >
-              {"Sign up"}
-            </button>
-          </form>
-        </Modal>
+        <SignIn
+          onClose={() => setSignInVisibility(false)}
+          onSignUpClick={handleSignUpClick}
+          onSuccess={handleSignInSuccess} // Pass the callback function
+        />
       )}
     </div>
   );
