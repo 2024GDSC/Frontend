@@ -36,12 +36,9 @@ export default function SignIn({ onClose, onSignUpClick, onSuccess }) {
         }
       );
 
-      // Check if the request was successful (status code 200-299)
       if (response.status === 200) {
-        // Handle the successful response, e.g., redirect or set user authentication state
-        console.log("Sign in successful");
-        // Invoke the onSuccess callback
-        onSuccess();
+        localStorage.setItem("token", response.data.data.accessToken);
+        onSuccess(email);
       } else {
         // Handle the error response, e.g., display an error message
         console.error("Sign in failed");

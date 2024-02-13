@@ -18,7 +18,6 @@ const MapWithCCTVMarker = ({
   const [currentMap, setCurrentMap] = useState(projectMaps[0]);
   const [newProjectName, setNewProjectName] = useState("");
   const [showAddProjectModal, setShowAddProjectModal] = useState(false);
-
   const [touched, setTouched] = useState(false);
   const [validity, setValidity] = useState(false);
 
