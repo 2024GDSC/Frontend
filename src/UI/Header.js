@@ -1,7 +1,14 @@
 import NavItem from "./NavItem";
 import mainlogo from "../Assets/images/logo.png";
+import Wrapper from "./Wrapper";
 
-function Header({ onSignInClick }) {
+function Header({ onSignInClick, signedIn, setSignedIn }) {
+  const handleSignOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userEmail");
+    setSignedIn(false);
+    window.location.reload();
+  };
   return (
     <div className="container">
       <header className="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
@@ -15,12 +22,23 @@ function Header({ onSignInClick }) {
             style={{ width: "120px", height: "43.32px" }}
           />
         </a>
+
         <ul className="nav nav-pills">
-          <NavItem href="signup" text="Sign up" isActive={true} />
-          <NavItem href="#!" text="Sign in" onClick={onSignInClick} />
           <NavItem href="console" text="Console" />
-          <NavItem href="#!" text="Pricing" />
           <NavItem href="#!" text="About" />
+          {signedIn ? (
+            <NavItem
+              href="#!"
+              text="Sign out"
+              isActive={true}
+              onClick={handleSignOut}
+            />
+          ) : (
+            <Wrapper>
+              <NavItem href="#!" text="Sign in" onClick={onSignInClick} />
+              <NavItem href="signup" text="Sign up" isActive={true} />
+            </Wrapper>
+          )}
         </ul>
       </header>
     </div>

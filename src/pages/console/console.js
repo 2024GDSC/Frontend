@@ -13,21 +13,8 @@ const rowStyle = {
   paddingLeft: "0",
   paddingRight: "0",
 };
-// const getToken = () => {
-//   return localStorage.getItem("jwtToken");
-// };
 
 const Console = () => {
-  // const token = getToken();
-
-  // // Check if the token is present
-  // if (!token) {
-  //   // Redirect to the login page or show an unauthorized message
-  //   // You can use react-router for navigation
-  //   alert("Please sign in to access console!");
-  //   return <Navigate to="/" />;
-  // }
-
   const { projectName } = useParams();
 
   const [isMarkerAvailable, setIsMarkerAvailable] = useState(false);
