@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import mainlogo from "../../Assets/images/logo.png";
 import SignupInput from "../../UI/SignupInput";
 import axios from "axios";
+import { API } from "../../config";
 
 export default function SignUp() {
   const [firstName, setFirstName] = useState("");
@@ -49,15 +50,12 @@ export default function SignUp() {
 
     if (validity) {
       try {
-        const response = await axios.post(
-          "http://34.47.72.96:9001/member/signup",
-          {
-            email,
-            name: `${firstName} ${lastName}`,
-            password,
-            role: "SIMULATOR",
-          }
-        );
+        const response = await axios.post(`${API.SIGNUP}`, {
+          email,
+          name: `${firstName} ${lastName}`,
+          password,
+          role: "SIMULATOR",
+        });
 
         console.log("Signup successful:", response.data);
         navigate("/"); // Replace "/" with the actual path of your main page
