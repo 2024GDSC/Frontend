@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./AlbumCard.css";
+import Modal from "./Modal";
 
 const AlbumCard = ({ projectName, projectDescription, projectCreatedTime }) => {
+  const [isDeleteModalVisible, setDeleteModalVisible] = useState(false);
+
   const navigate = useNavigate();
 
   const navigateToConsole = () => {
     navigate(`/console/${projectName}`);
+  };
+
+  const handleDeleteProject = () => {
+    setDeleteModalVisible(true);
   };
   return (
     <div className="col">
@@ -47,6 +54,13 @@ const AlbumCard = ({ projectName, projectDescription, projectCreatedTime }) => {
               >
                 View
               </button>
+              <button
+                type="button"
+                className="btn btn-sm btn-outline-secondary"
+                onClick={handleDeleteProject}
+              >
+                Delete
+              </button>
             </div>
             <small className="text-body-secondary">
               {projectCreatedTime.substr(0, 10)}
@@ -54,6 +68,27 @@ const AlbumCard = ({ projectName, projectDescription, projectCreatedTime }) => {
           </div>
         </div>
       </div>
+      {isDeleteModalVisible && (
+        <Modal
+          onClose={() => {
+            setDeleteModalVisible(false);
+          }}
+          title={`Do you want to delete ${projectName}?`}
+        >
+          <button
+            type="button"
+            className="btn btn-lg w-100 mb-2 rounded-3 btn-outline-danger"
+          >
+            Yes
+          </button>
+          <button
+            type="button"
+            className="btn btn-lg w-100 mb-2 rounded-3 btn-primary"
+          >
+            No
+          </button>
+        </Modal>
+      )}
     </div>
   );
 };

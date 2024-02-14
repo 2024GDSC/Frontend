@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "../../UI/Modal";
 import Input from "../../UI/Input";
 import axios from "axios";
+import { API } from "../../config";
 
 export default function SignIn({ onClose, onSignUpClick, onSuccess }) {
   const [email, setEmail] = useState("");
@@ -26,15 +27,11 @@ export default function SignIn({ onClose, onSignUpClick, onSuccess }) {
 
     try {
       // Make the API request using axios
-      const response = await axios.post(
-        "http://34.47.72.96:9001/member/signin",
-        data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await axios.post(`${API.SIGNIN}`, data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       if (response.status === 200) {
         localStorage.setItem("token", response.data.data.accessToken);

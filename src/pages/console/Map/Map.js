@@ -8,6 +8,7 @@ import {
 import cctvImage from "../../../Assets/images/CCTVMarkerIcon.png";
 
 const libraries = ["places"];
+const GOOGLE_MAP_API_KEY = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
 
 export default function Map({
   isMarkerAvailable,
@@ -50,7 +51,7 @@ export default function Map({
   }, [isReset, setReset]);
 
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "",
+    googleMapsApiKey: GOOGLE_MAP_API_KEY,
     libraries,
   });
 

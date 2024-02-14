@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { API } from "../config";
 import Header from "../UI/Header";
 import ClassicJumbotron from "../UI/ClassicJumbotron";
 import AlignedJumbotron from "../UI/AlignedJumbotron";
@@ -37,7 +38,7 @@ export default function Main() {
   const fetchProjects = async () => {
     const token = localStorage.getItem("token");
     try {
-      const response = await axios.get("http://34.47.72.96:9001/project/", {
+      const response = await axios.get(`${API.FETCHPROJECT}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -1,16 +1,24 @@
 import React, { useState } from "react";
-import axios from "axios"; // Import axios library
+import axios from "axios";
 import AlbumCard from "./AlbumCard";
 import Modal from "./Modal";
 import Input from "./Input";
+import { API } from "../config";
 
 const Album = ({ title, projects }) => {
   const [showCreateProjectModal, setShowCreateProjectModal] = useState(false);
-  const [newProjectName, setNewProjectName] = useState("");
-  const [touched, setTouched] = useState(false);
-  const [validity, setValidity] = useState(false);
+  const [formState, setFormState] = useState({
+    newProjectName: "",
+    description: "",
+    visibility: "",
+    collaborators: "",
+  });
+  const [validationState, setValidationState] = useState({
+    touched: false,
+    validity: false,
+  });
 
-  const handleCreateProject = () => {
+  const handleCreateProjectModal = () => {
     setShowCreateProjectModal(true);
   };
 
@@ -20,40 +28,40 @@ const Album = ({ title, projects }) => {
 
   const handleValidation = (event) => {
     const inputValue = event.target.value;
-    setTouched(true);
     const isValid = validateField(inputValue);
-    setValidity(isValid);
+    setValidationState({
+      ...validationState,
+      touched: true,
+      validity: isValid,
+    });
   };
 
+  console.log(formState.collaborators);
+
   const getFeedbackMessage = () => {
-    if (touched && !validity) {
+    if (validationState.touched && !validationState.validity) {
       return "Project name must be longer than 1 and less than 15";
     }
   };
 
   const handleSaveProject = async () => {
     const token = localStorage.getItem("token");
-    if (newProjectName.trim() !== "") {
+    if (formState.newProjectName.trim() !== "") {
       const newProject = {
-        title: newProjectName,
-        description: document.getElementById("description").value,
-        isOpen: document.getElementById("visibility").value === "2", // Assuming 2 represents "Public"
-        sharedMemberList: document
-          .getElementById("Collaborators")
-          .value.split(",")
-          .map((email) => email.trim()),
+        title: formState.newProjectName,
+        description: formState.description,
+        isOpen: formState.visibility === "2",
+        sharedMemberList: formState.collaborators.split(",").map((email) => {
+          return email.trim();
+        }),
       };
 
       try {
-        const response = await axios.post(
-          "http://34.47.72.96:9001/project/create",
-          newProject,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.post(`${API.CREATEPROJECT}`, newProject, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         if (response.status === 200) {
           window.location.reload();
@@ -65,7 +73,13 @@ const Album = ({ title, projects }) => {
         console.error("Error:", error);
       }
 
-      setNewProjectName("");
+      setFormState({
+        ...formState,
+        newProjectName: "",
+        description: "",
+        visibility: "",
+        collaborators: "",
+      });
       setShowCreateProjectModal(false);
     } else {
     }
@@ -83,7 +97,7 @@ const Album = ({ title, projects }) => {
             <button
               type="button"
               className="btn btn-primary d-flex align-items-center justify-content-center"
-              onClick={handleCreateProject}
+              onClick={handleCreateProjectModal}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -128,11 +142,15 @@ const Album = ({ title, projects }) => {
                 id="title"
                 placeholder="Map 1"
                 onChange={(e) => {
-                  setNewProjectName(e.target.value);
-                  handleValidation(e); // Pass the event object to handleValidation
+                  setFormState({
+                    ...formState,
+                    newProjectName: e.target.value,
+                  });
+                  // setNewProjectName(e.target.value);
+                  handleValidation(e);
                 }}
-                validity={validity}
-                touched={touched}
+                validity={validationState.validity}
+                touched={validationState.touched}
               >
                 <div className="invalid-feedback">{getFeedbackMessage()}</div>
               </Input>
@@ -143,13 +161,30 @@ const Album = ({ title, projects }) => {
                 className="form-control"
                 aria-label="With textarea"
                 id="description"
+                value={formState.description}
+                onChange={(e) => {
+                  setFormState({
+                    ...formState,
+                    description: e.target.value,
+                  });
+                }}
               ></textarea>
             </div>
             <div className="input-group mb-3">
               <label className="input-group-text" htmlFor="visibility">
                 Visibility
               </label>
-              <select className="form-select" id="visibility">
+              <select
+                className="form-select"
+                id="visibility"
+                value={formState.visibility}
+                onChange={(e) => {
+                  setFormState({
+                    ...formState,
+                    visibility: e.target.value,
+                  });
+                }}
+              >
                 <option value="">Choose...</option>
                 <option value="1">Private</option>
                 <option value="2">Public</option>
@@ -160,13 +195,17 @@ const Album = ({ title, projects }) => {
                 type="Invite collaborators"
                 id="Collaborators"
                 placeholder="Invite collaborators"
+                value={formState.collaborators}
+                onChange={(e) => {
+                  setFormState({ ...formState, collaborators: e.target.value });
+                }}
               ></Input>
             </div>
             <button
               className="w-100 mb-2 btn btn-lg rounded-3 btn-primary"
               type="submit"
               onClick={handleSaveProject}
-              disabled={!validity}
+              disabled={!validationState.validity}
             >
               {"Create Project"}
             </button>
