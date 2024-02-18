@@ -1,11 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  GoogleMap,
-  Marker,
-  InfoWindow,
-  useLoadScript,
-} from "@react-google-maps/api";
+import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
 import cctvImage from "../../../Assets/images/CCTVMarkerIcon.png";
+import Modal from "../../../UI/Modal";
+import sample from "../../../Assets/video/sampleVideo.mp4";
 
 const libraries = ["places"];
 const GOOGLE_MAP_API_KEY = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
@@ -17,21 +14,16 @@ export default function Map({
   isReset,
   setReset,
 }) {
-  const mapContainerStyle = {
-    width: "100%",
-    height: "100vh",
-  };
-
-  // Use a state for the initial center, and don't change it after the initial render
   const [initialCenter] = useState({
     lat: 37.7749,
     lng: -122.4194,
   });
 
   const [markers, setMarkers] = useState([]);
-  const [selectedMarker, setSelectedMarker] = useState(null);
   const isMarkerAvailableRef = useRef(isMarkerAvailable);
   const isDeleteAvailableRef = useRef(isDeleteAvailable);
+  const [isVideoModalOpen, setVideoModalOpen] = useState(false);
+  const [modalTitle, setModalTitle] = useState(null);
 
   useEffect(() => {
     isMarkerAvailableRef.current = isMarkerAvailable;
@@ -42,13 +34,16 @@ export default function Map({
   }, [isDeleteAvailable]);
 
   useEffect(() => {
-    // Reset markers when isReset changes
     if (isReset) {
       setMarkers([]);
-      // Reset isReset to false after clearing markers
       setReset(false);
     }
   }, [isReset, setReset]);
+
+  const mapContainerStyle = {
+    width: "100%",
+    height: "100vh",
+  };
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: GOOGLE_MAP_API_KEY,
@@ -72,19 +67,6 @@ export default function Map({
         };
         setMarkers((prevMarkers) => [...prevMarkers, newMarker]);
       } else {
-        // Check if the click was on a marker
-        const clickedMarker = markers.find((marker) => {
-          const markerPosition = marker.position;
-          return (
-            Math.abs(markerPosition.lat - clickedPosition.lat) < 0.0001 &&
-            Math.abs(markerPosition.lng - clickedPosition.lng) < 0.0001
-          );
-        });
-
-        if (clickedMarker) {
-          // Show info window for the clicked marker
-          setSelectedMarker(clickedMarker);
-        }
       }
     });
   };
@@ -92,8 +74,12 @@ export default function Map({
   const onDeleteMarker = (markerId) => {
     const updatedMarkers = markers.filter((marker) => marker.id !== markerId);
     setMarkers(updatedMarkers);
-    // Close info window when marker is deleted
-    setSelectedMarker(null);
+  };
+
+  const onCheckMarker = (markerId) => {
+    console.log(markerId);
+    setModalTitle(markerId);
+    setVideoModalOpen(true);
   };
 
   return (
@@ -113,21 +99,33 @@ export default function Map({
             scaledSize: new window.google.maps.Size(40, 40),
           }}
           onClick={() =>
-            isDeleteAvailableRef.current ? onDeleteMarker(marker.id) : null
+            isDeleteAvailableRef.current
+              ? onDeleteMarker(marker.id)
+              : onCheckMarker(marker.id)
           }
         />
       ))}
 
-      {selectedMarker && (
-        <InfoWindow
-          position={selectedMarker.position}
-          onCloseClick={() => setSelectedMarker(null)}
+      {isVideoModalOpen && (
+        // Render your modal component here, passing modalContent as props
+        <Modal
+          title={modalTitle}
+          onClose={() => {
+            setVideoModalOpen(false);
+            setModalTitle(null);
+          }}
         >
-          <div>
-            {/* Content for the info window */}
-            <p>Marker ID: {selectedMarker.id}</p>
-          </div>
-        </InfoWindow>
+          <video
+            class="object-fit-cover"
+            width="400"
+            height="250"
+            controls
+            autoPlay
+            loop
+          >
+            <source src={sample}></source>
+          </video>
+        </Modal>
       )}
     </GoogleMap>
   );
