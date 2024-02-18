@@ -3,6 +3,7 @@ import "./App.css";
 import Main from "./pages/main";
 import Console from "./pages/console/console";
 import SignUp from "./pages/Membership/SignUp";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
             <Route path=":projectName"></Route>
           </Route>
           <Route path="/signup" element={<SignUp />}></Route>
+          <Route path="/dashboard" element={<Dashboard />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
