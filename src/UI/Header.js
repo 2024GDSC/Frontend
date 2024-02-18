@@ -24,17 +24,22 @@ function Header({ onSignInClick, signedIn, setSignedIn }) {
         </a>
 
         <ul className="nav nav-pills">
-          <NavItem href="console" text="Console" />
-          <NavItem href="#!" text="About" />
           {signedIn ? (
-            <NavItem
-              href="#!"
-              text="Sign out"
-              isActive={true}
-              onClick={handleSignOut}
-            />
+            <Wrapper>
+              <NavItem href="console" text="Console" />
+              <NavItem href={"dashboard"} text={"Dashboard"} />
+              <NavItem href="#!" text="About" />
+              <NavItem
+                href="#!"
+                text="Sign out"
+                isActive={true}
+                onClick={handleSignOut}
+              />
+            </Wrapper>
           ) : (
             <Wrapper>
+              <NavItem href="console" text="Console" />
+              <NavItem href="#!" text="About" />
               <NavItem href="#!" text="Sign in" onClick={onSignInClick} />
               <NavItem href="signup" text="Sign up" isActive={true} />
             </Wrapper>
