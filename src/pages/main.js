@@ -9,6 +9,7 @@ import AlignedJumbotron from "../UI/AlignedJumbotron";
 import Album from "../UI/Album";
 import Footer from "../UI/Footer";
 import SignIn from "./Membership/SignIn";
+import About from "./About/About";
 
 export default function Main() {
   const [isSignInVisible, setSignInVisibility] = useState(false);
@@ -80,6 +81,7 @@ export default function Main() {
       <ClassicJumbotron></ClassicJumbotron>
       <AlignedJumbotron></AlignedJumbotron>
       {renderAlbum}
+      {/* <About></About> */}
       <Footer></Footer>
 
       {isSignInVisible && (

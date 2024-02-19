@@ -17,11 +17,13 @@ export default function DashboardRecords({ isHeader }) {
   ) : (
     <tbody>
       <DashboardRow
-        hash={"asdflihqwerjbasdf1bmnzxvqwerqwrew"}
+        hash={
+          "185f8db32271fe25f561a6fc938b2e264306ec304eda518007d1764826381969"
+        }
         date={"2024-01-02"}
         location={"Los Angeles"}
         category={"Robbery"}
-        existence={"true"}
+        existence={"True"}
       ></DashboardRow>
     </tbody>
   );

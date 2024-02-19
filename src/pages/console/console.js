@@ -21,6 +21,7 @@ const Console = () => {
   const [isDeleteAvailable, setIsDeleteAvailable] = useState(false);
   const [isReset, setIsReset] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isEvaluating, setIsEvaluating] = useState(false);
 
   const onSetMarkerAvailable = () => {
     if (isMarkerAvailable) {
@@ -46,6 +47,7 @@ const Console = () => {
 
   const onSetReset = () => {
     setIsReset(true);
+    setIsEvaluating(false);
   };
 
   const handleMapSearch = (query) => {
@@ -53,7 +55,24 @@ const Console = () => {
     // You can use this information to update the map with the searched location
   };
 
-  const progresses = [10, 20, 35, 40, 80, 100];
+  const progresses = [
+    {
+      title: "Security score",
+      percentage: 40,
+      description:
+        "Security score is calculated by multiplying weighted value on the number of public facilities such as police station, fire station and hospital.",
+    },
+    {
+      title: "CCTV density",
+      percentage: 80,
+      description:
+        "CCTV density is the density of cameras close to the police stations.",
+    },
+  ];
+
+  const handleEvaluation = () => {
+    setIsEvaluating(true);
+  };
 
   return (
     <div>
@@ -114,10 +133,21 @@ const Console = () => {
 
               <div className="collapse show" id="home-collapse">
                 <ul>
-                  {progresses.map((percentage, idx) => {
+                  {progresses.map((progress, idx) => {
                     return (
                       <div key={idx}>
-                        <ProgressBar percentage={percentage}></ProgressBar>
+                        <ProgressBar
+                          title={progress.title}
+                          percentage={isEvaluating ? progress.percentage : 0}
+                          isEvaluating={isEvaluating}
+                        ></ProgressBar>
+                        <p style={{ marginRight: "1.25rem" }}>
+                          <small
+                            style={{ lineHeight: "1px", color: "GrayText" }}
+                          >
+                            {progress.description}
+                          </small>
+                        </p>
                       </div>
                     );
                   })}
@@ -129,7 +159,11 @@ const Console = () => {
           <div className="mt-auto">
             <hr />
             <div className="d-grid gap-3">
-              <button className="btn btn-primary" type="button">
+              <button
+                className="btn btn-primary"
+                type="button"
+                onClick={handleEvaluation}
+              >
                 Evaluate
               </button>
               <button className="btn btn-outline-primary" type="button">
