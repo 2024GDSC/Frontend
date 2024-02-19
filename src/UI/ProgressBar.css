@@ -1,0 +1,12 @@
+.progress-level {
+  animation: ani;
+  animation-duration: 1s;
+
+  animation-fill-mode: both;
+}
+
+@keyframes ani {
+  0% {
+    width: 0;
+  }
+}

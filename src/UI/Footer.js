@@ -1,7 +1,7 @@
 import React from "react";
 
 const Footer = () => {
-  const footer = ["Home", "Features", "Pricing", "FAQs", "About"];
+  const footer = ["Home", "FAQs", "About Us"];
   return (
     <div className="container">
       <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
